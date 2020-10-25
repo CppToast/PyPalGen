@@ -130,8 +130,8 @@ def generate(value = 0):
         print_hex_font = font_size_entry.get()
         draw_outline = outline_check_var.get() == 1
         print_hex = hex_check_var.get() == 1
-        dark_shade_intensity = dark_shade_intensity_scale.get() / 100
-        bright_shade_intensity = bright_shade_intensity_scale.get() / 100
+        dark_shade_intensity = dark_shade_intensity_scale.get() / 10
+        bright_shade_intensity = bright_shade_intensity_scale.get() / 10
         dark_shade = dark_shade_check_var. get() == 1
         bright_shade = bright_shade_check_var. get() == 1
         gamma = 1 / gamma_scale.get()
@@ -146,11 +146,11 @@ def generate(value = 0):
         #blend_ratio_step = 1 / (palette_size + 1)
         for shade in range(1, palette_size+1):
             current_color = hexToCol(palette_base_colors[i])
-            current_lum = pow(l_step * shade / 512, gamma) * 512
-            if current_lum < 256 and dark_shade:
-                current_color = blendColors(current_color, hexToCol(dark_shade_color), (512 - current_lum) / 256 * dark_shade_intensity)
-            if current_lum > 256 and bright_shade:
-                current_color = blendColors(current_color, hexToCol(bright_shade_color), current_lum / 256 * bright_shade_intensity)
+            current_lum = pow(l_step * shade / 512, gamma) * 512 - 256
+            if current_lum < 0 and dark_shade:
+                current_color = blendColors(current_color, hexToCol(dark_shade_color), -current_lum / 512 * dark_shade_intensity)
+            if current_lum > 0 and bright_shade:
+                current_color = blendColors(current_color, hexToCol(bright_shade_color), current_lum / 512 * bright_shade_intensity)
             palette[i][palette_size - shade] = lumToCol(l_step * shade, current_color, gamma)
 
     display.delete("all")
