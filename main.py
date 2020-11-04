@@ -1,4 +1,5 @@
 # Palette generator v2
+# aka PyPalGen
 # 2020 CppToast
 
 from tkinter import *
@@ -218,7 +219,7 @@ root.title("Palette Generator by CppToast")
 
 # Setting the icon might not work on non-Windows systems, 
 # and since icon is not really important, we can do without 
-# an icon. I might think of an alternative solution later. 
+# one. I might think of an alternative solution later. 
 try:
     root.iconbitmap(os.curdir + "/icon.ico")
 except:
