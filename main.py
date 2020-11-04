@@ -13,7 +13,7 @@ if use_system_colorpicker:
 else:
     import colorpicker
 
-palette_base_colors = [ "#ff0000", "#00ff00", "#0000ff" ]
+palette_base_colors = [] #["#000000","#808080", "#ffffff"] #[ "#ff0000", "#00ff00", "#0000ff" ]
 palette_size = 9
 upscale_factor = 32
 upscale_factor_x = 48
@@ -215,7 +215,14 @@ def dumpGIMP():
 
 root = Tk()
 root.title("Palette Generator by CppToast")
-root.iconbitmap(os.curdir + "/icon.ico")
+
+# Setting the icon might not work on non-Windows systems, 
+# and since icon is not really important, we can do without 
+# an icon. I might think of an alternative solution later. 
+try:
+    root.iconbitmap(os.curdir + "/icon.ico")
+except:
+    pass
 
 status = Label(text = "Total colors:")
 status.grid(row = 1, column = 2, sticky = "e")
